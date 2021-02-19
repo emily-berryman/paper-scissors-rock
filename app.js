@@ -1,18 +1,17 @@
 
 
+
 function playRound(playerC, computerChoice){
-    let playerChoice = capitalizePlayerInput(playerSelection)
+    let playerChoice = capitalizePlayerInput(playerC)
 
     if (playerChoice == computerChoice){
         console.log('It\'s a draw, try again!')}
         
     else if ((playerChoice == 'Rock' && computerChoice == 'Scissors') || (playerChoice == 'Scissors' && computerChoice == 'Paper') || (playerChoice == 'Paper' && computerChoice == 'Rock')){
-    console.log('Congrats, you win!')
-    } 
-    else ((playerChoice == 'Rock' && computerChoice == 'Paper') || (playerChoice == 'Scissors' && computerChoice == 'Rock') || (playerChoice == 'Paper' && computerChoice == 'Scissors')){
+    console.log('Congrats, you win!')} 
+    else if ((playerChoice == 'Rock' && computerChoice == 'Paper') || (playerChoice == 'Scissors' && computerChoice == 'Rock') || (playerChoice == 'Paper' && computerChoice == 'Scissors')){
     console.log('Oh no, you lose!')
     } 
-
  }
 
 
