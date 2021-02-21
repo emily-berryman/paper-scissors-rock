@@ -1,6 +1,3 @@
-
-
-
 function playRound(playerC, computerChoice){
     let playerChoice = capitalizePlayerInput(playerC)
 
@@ -13,6 +10,7 @@ function playRound(playerC, computerChoice){
     console.log('Oh no, you lose!')
     } 
  }
+
 
 
 function computerSelection()  {
@@ -29,3 +27,4 @@ function capitalizePlayerInput (playerSelection) {
     console.log(nameCapitalized)
     return nameCapitalized
 }
+
