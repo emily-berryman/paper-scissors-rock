@@ -1,46 +1,46 @@
-let playerScore = 1
-let computerScore = 1
+// PAPER, SCISSORS, ROCK -- CONSOLE GAME
+
+let playerScore = 0
+let computerScore = 0
 let roundNum = 1
 
+// 1) Start by calling the game function & passing in the computerSelection() func 
+
+// 2) This will then call the playRound func x 5 times which keeps a score & declares the overall winner when either the computer or player gets to 5 points 
+
+// 3) Once the computer or player win the score is reset by the resetGame() & the player can play another round
+
+// Having issue that once a match is won the game is reset but the game() func doesn't seem to running properly when called a 2nd time - i.e even though player & computerScore's are both 0 meaning the 1st if statement in the game() function should be true & run - the else statement keeps running instead
+
+function game(computerChoice) {
+    console.log('back to the game function')
+    if ((computerScore && playerScore >= 0) && (computerScore && playerScore < 5)){
+        playRound(computerChoice)
+    } else {
+        return 'Thanks for playing'
+    }
+}
 function playRound(computerChoice) {
 
-     
     let playerSelection = prompt('Paper, Scissors or Rock?')
     let playerChoice = capitalizePlayerInput(playerSelection)
 
     console.log('computer selection is ' + computerChoice)
     console.log('player selection is ' + playerSelection)
 
-    
     if ((playerChoice == 'Rock' && computerChoice == 'Scissors') || (playerChoice == 'Scissors' && computerChoice == 'Paper') || (playerChoice == 'Paper' && computerChoice == 'Rock' && (computerScore <= 5 || playerScore <= 5))
     ) {
         playerScore++
-        console.log('You won this round!')
-        if (playerScore == 5) {
-            return 'You WON! You got 5 points :))'
-        
-            // let newGame = confirm('Would you like to play another round???')
-            // if (newGame){
-            // return console.log('will restart')} else {
-            //     return
-            // }
-        }
+        playerScore == 5 ? console.log('YOU WON THE GAME! Well done :))') && resetGame() : console.log('You won this round!')
+        // if (playerScore == 5) {
+        //     return 'You WON! You got 5 points :))'
+        // }
         roundNum++
     }
     else if ((playerChoice == 'Rock' && computerChoice == 'Paper') || (playerChoice == 'Scissors' && computerChoice == 'Rock') || (playerChoice == 'Paper' && computerChoice == 'Scissors' && (computerScore <= 5 || playerScore <= 5))
     ) {
         computerScore++
-        console.log('Oh no, you lost this round!')
-        if (computerScore == 5){
-            return 'Computer WON! Better luck next time'
-           
-            // let newGame = confirm('Would you like to play another round???')
-            // if (newGame){
-            // return console.log('will restart')} 
-            // else {
-            //     return
-            // }
-        }
+        computerScore == 5 ? console.log('COMPUTER WON! Better luck next time!') && resetGame() : console.log('Oh no, you lost this round')
         roundNum++
     }
         
@@ -54,6 +54,12 @@ function playRound(computerChoice) {
 
 }
 
+function resetGame() {
+   playerScore = 0
+   computerScore = 0
+   roundNum = 1
+}
+
 function computerSelection() {
     let array = ['Rock', 'Paper', 'Scissors']
     let rand = array[Math.floor(Math.random() * array.length)]
@@ -63,34 +69,8 @@ function computerSelection() {
 function capitalizePlayerInput(playerSelection) {
     let transform = playerSelection.toLowerCase()
     let nameCapitalized = transform.charAt(0).toUpperCase() + transform.slice(1)
-    console.log(nameCapitalized)
     return nameCapitalized
 }
-
-function game(computerChoice) {
-    console.log('back to the game function)')
-    if (computerScore && playerScore < 5){
-        playRound(computerChoice)
-    } else {
-        return 'Thanks for playing'
-    }
-    
-    // for(let i = 0; computerScore || playerScore < 5; i++) {
-    //         console.log('I have come back to the game function ...')
-    //         playRound(computerChoice)
-    //     }
-    // let newGame = prompt('Enter Yes if you\'d like to play another round?')
-    // // if (newGame = 'Yes'){
-    //     return 'Great - click the button to start again'
-    // } else ('Ok, hope to see you again soon')
-}
-
-function resetGame() {
-   playerScore = 0
-   computerScore = 0
-   roundNum = 1
-}
-
 
 
 // Write a NEW function called game(). Use the previous function inside of this one to play a 5 round game that keeps score and reports a winner or loser at the end
