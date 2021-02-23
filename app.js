@@ -14,7 +14,8 @@ let roundNum = 1
 
 function game(computerChoice) {
     console.log('back to the game function')
-    if ((computerScore && playerScore >= 0) && (computerScore && playerScore < 5)){
+    console.log(computerScore, playerScore)
+    if (computerScore < 5 && playerScore < 5){
         playRound(computerChoice)
     } else {
         return 'Thanks for playing'
@@ -31,7 +32,7 @@ function playRound(computerChoice) {
     if ((playerChoice == 'Rock' && computerChoice == 'Scissors') || (playerChoice == 'Scissors' && computerChoice == 'Paper') || (playerChoice == 'Paper' && computerChoice == 'Rock' && (computerScore <= 5 || playerScore <= 5))
     ) {
         playerScore++
-        playerScore == 5 ? console.log('YOU WON THE GAME! Well done :))') && resetGame() : console.log('You won this round!')
+        playerScore == 5 ? resetGame('YOU WON THE GAME! Well done :))') : console.log('You won this round!')
         // if (playerScore == 5) {
         //     return 'You WON! You got 5 points :))'
         // }
@@ -40,7 +41,7 @@ function playRound(computerChoice) {
     else if ((playerChoice == 'Rock' && computerChoice == 'Paper') || (playerChoice == 'Scissors' && computerChoice == 'Rock') || (playerChoice == 'Paper' && computerChoice == 'Scissors' && (computerScore <= 5 || playerScore <= 5))
     ) {
         computerScore++
-        computerScore == 5 ? console.log('COMPUTER WON! Better luck next time!') && resetGame() : console.log('Oh no, you lost this round')
+        computerScore == 5 ? resetGame('COMPUTER WON! Better luck next time!') : console.log('Oh no, you lost this round')
         roundNum++
     }
         
@@ -54,7 +55,8 @@ function playRound(computerChoice) {
 
 }
 
-function resetGame() {
+function resetGame(str) {
+    console.log(str)
    playerScore = 0
    computerScore = 0
    roundNum = 1
