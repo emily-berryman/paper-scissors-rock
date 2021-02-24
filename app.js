@@ -36,16 +36,21 @@ function playRound(computerChoice) {
     if ((playerChoice == 'Rock' && computerChoice == 'Scissors') || (playerChoice == 'Scissors' && computerChoice == 'Paper') || (playerChoice == 'Paper' && computerChoice == 'Rock' && (computerScore <= 5 || playerScore <= 5))
     ) {
         playerScore++
-        playerScore == 5 ? resetGame('YOU WON THE GAME! Well done :))', playing) : console.log('You won this round!')
-        // if (playerScore == 5) {
-        //     return 'You WON! You got 5 points :))'
-        // }
+        if (playerScore == 5){
+            return resetGame('YOU WON THE GAME! Well done :))', playing)
+        } else {
+            console.log('You won this round!')
+        }
         roundNum++
     }
     else if ((playerChoice == 'Rock' && computerChoice == 'Paper') || (playerChoice == 'Scissors' && computerChoice == 'Rock') || (playerChoice == 'Paper' && computerChoice == 'Scissors' && (computerScore <= 5 || playerScore <= 5))
     ) {
         computerScore++
-        computerScore == 5 ? resetGame('COMPUTER WON! Better luck next time!', playing) : console.log('Oh no, you lost this round')
+        if (computerScore == 5){
+            return resetGame('COMPUTER WON! Better luck next time!', playing)
+        } else {
+            console.log('Oh no, you lost this round')
+        }
         roundNum++
     }
         
@@ -68,12 +73,7 @@ function resetGame(str, playing) {
         roundNum = 1 
         playerScore = 0
         computerScore = 0
-        console.log('reset')
-        return 'Thanks for playing'
-    } else {
-        console.log('nevermind')
-        return 'nevermind'
-    }
+    } 
 }
 
 function computerSelection() {
