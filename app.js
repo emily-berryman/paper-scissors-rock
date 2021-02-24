@@ -3,6 +3,7 @@
 let playerScore = 0
 let computerScore = 0
 let roundNum = 1
+let playing = false
 
 // 1) Start by calling the game function & passing in the computerSelection() func 
 
@@ -12,27 +13,30 @@ let roundNum = 1
 
 // Having issue that once a match is won the game is reset but the game() func doesn't seem to running properly when called a 2nd time - i.e even though player & computerScore's are both 0 meaning the 1st if statement in the game() function should be true & run - the else statement keeps running instead
 
-function game(computerChoice) {
+function game() {
+    playing = true
     console.log('back to the game function')
     console.log(computerScore, playerScore)
     if (computerScore < 5 && playerScore < 5){
-        playRound(computerChoice)
+        playRound(computerSelection())
     } else {
-        return 'Thanks for playing'
+        return 'Thanks for playing' && resetGame()
     }
 }
 function playRound(computerChoice) {
 
+    playing = false
     let playerSelection = prompt('Paper, Scissors or Rock?')
     let playerChoice = capitalizePlayerInput(playerSelection)
-
+    
+    console.log('playing is' + playing)
     console.log('computer selection is ' + computerChoice)
     console.log('player selection is ' + playerSelection)
 
     if ((playerChoice == 'Rock' && computerChoice == 'Scissors') || (playerChoice == 'Scissors' && computerChoice == 'Paper') || (playerChoice == 'Paper' && computerChoice == 'Rock' && (computerScore <= 5 || playerScore <= 5))
     ) {
         playerScore++
-        playerScore == 5 ? resetGame('YOU WON THE GAME! Well done :))') : console.log('You won this round!')
+        playerScore == 5 ? resetGame('YOU WON THE GAME! Well done :))', playing) : console.log('You won this round!')
         // if (playerScore == 5) {
         //     return 'You WON! You got 5 points :))'
         // }
@@ -41,7 +45,7 @@ function playRound(computerChoice) {
     else if ((playerChoice == 'Rock' && computerChoice == 'Paper') || (playerChoice == 'Scissors' && computerChoice == 'Rock') || (playerChoice == 'Paper' && computerChoice == 'Scissors' && (computerScore <= 5 || playerScore <= 5))
     ) {
         computerScore++
-        computerScore == 5 ? resetGame('COMPUTER WON! Better luck next time!') : console.log('Oh no, you lost this round')
+        computerScore == 5 ? resetGame('COMPUTER WON! Better luck next time!', playing) : console.log('Oh no, you lost this round')
         roundNum++
     }
         
@@ -55,11 +59,21 @@ function playRound(computerChoice) {
 
 }
 
-function resetGame(str) {
+function resetGame(str, playing) {
+    
     console.log(str)
-   playerScore = 0
-   computerScore = 0
-   roundNum = 1
+    console.log('Type game() into your console to play another match!')
+    console.log('playing is' + playing)
+    if (!(playing)) {
+        roundNum = 1 
+        playerScore = 0
+        computerScore = 0
+        console.log('reset')
+        return 'Thanks for playing'
+    } else {
+        console.log('nevermind')
+        return 'nevermind'
+    }
 }
 
 function computerSelection() {
