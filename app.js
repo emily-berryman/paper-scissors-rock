@@ -74,6 +74,7 @@ function delcareScore(){
     playerScoreOutput.textContent = `player: ${playerScore}`
     compScoreOutput.textContent = `computer: ${computerScore}`
 }
+
 function resetGame(str, playing) {
     
     output.textContent = str + ' Select another option to play again!'
