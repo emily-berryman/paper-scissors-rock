@@ -5,13 +5,18 @@ let computerScore = 0
 let roundNum = 1
 let playing = false
 
-// 1) Start by calling the game function & passing in the computerSelection() func 
 
-// 2) This will then call the playRound func x 5 times which keeps a score & declares the overall winner when either the computer or player gets to 5 points 
+// Start by adding click event to each of the paper scissors rock buttons
 
-// 3) Once the computer or player win the score is reset by the resetGame() & the player can play another round
+// First get reference to the elements
+const buttons = document.querySelectorAll(".btn");
 
-// Having issue that once a match is won the game is reset but the game() func doesn't seem to running properly when called a 2nd time - i.e even though player & computerScore's are both 0 meaning the 1st if statement in the game() function should be true & run - the else statement keeps running instead
+// Next add event listener for each button
+buttons.forEach((button) => button.addEventListener("click", playRound))
+
+const output = document.querySelector("#output");
+const playerScoreOutput = document.querySelector("#player-score")
+const compScoreOutput = document.querySelector("#computer-score")
 
 function game() {
     playing = true
@@ -23,11 +28,12 @@ function game() {
         return 'Thanks for playing' && resetGame()
     }
 }
-function playRound(computerChoice) {
-
+function playRound(e) {
+    
     playing = false
-    let playerSelection = prompt('Paper, Scissors or Rock?')
+    let playerSelection = e.target.id 
     let playerChoice = capitalizePlayerInput(playerSelection)
+    let computerChoice = computerSelection()
     
     console.log('playing is' + playing)
     console.log('computer selection is ' + computerChoice)
@@ -37,9 +43,10 @@ function playRound(computerChoice) {
     ) {
         playerScore++
         if (playerScore == 5){
-            return resetGame('YOU WON THE GAME! Well done :))', playing)
+            delcareScore(playerScore, computerScore)
+            return resetGame('YOU WON THE GAME, WELL DONE!', playing)
         } else {
-            console.log('You won this round!')
+            output.textContent = `You selected ${playerChoice} and the computer chose ${computerChoice} - congrats you won this round!`
         }
         roundNum++
     }
@@ -47,27 +54,29 @@ function playRound(computerChoice) {
     ) {
         computerScore++
         if (computerScore == 5){
+            delcareScore(playerScore, computerScore)
             return resetGame('COMPUTER WON! Better luck next time!', playing)
         } else {
-            console.log('Oh no, you lost this round')
+            output.innerHTML = '<h3>Oh no, you lost this round</h3>'
         }
         roundNum++
     }
         
     else if (playerChoice == computerChoice) {
-        console.log('It\'s a tie, try again!')
+        output.textContent = 'It\'s a tie, try again!'
     }
-    console.log('computerScore is ' + computerScore)
-    console.log('playerScore is ' + playerScore)
+    delcareScore(playerScore, computerScore)
     console.log('roundNum is ' + roundNum)
     game(computerChoice)
-
 }
 
+function delcareScore(){
+    playerScoreOutput.textContent = `player: ${playerScore}`
+    compScoreOutput.textContent = `computer: ${computerScore}`
+}
 function resetGame(str, playing) {
     
-    console.log(str)
-    console.log('Type game() into your console to play another match!')
+    output.textContent = str + ' Select another option to play again!'
     console.log('playing is' + playing)
     if (!(playing)) {
         roundNum = 1 
